@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>계정 삭제 요청 - 올리라이프 Check-in</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #2d5016 0%, #4a7c28 50%, #3d6b1e 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 32px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .logo h1 {
+      font-size: 24px;
+      color: #2d5016;
+      font-weight: 700;
+    }
+    .logo p {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+    h2 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .info-box {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .info-box strong {
+      color: #333;
+    }
+    .warning-box {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #856404;
+      line-height: 1.6;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: border-color 0.2s;
+      outline: none;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus {
+      border-color: #4a7c28;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover {
+      background: #c82333;
+    }
+    .submit-btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 24px;
+    }
+    .success-msg .check {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .success-msg h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .success-msg p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .contact {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: #888;
+    }
+    .contact a {
+      color: #4a7c28;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="formSection">
+      <div class="logo">
+        <h1>OlyLife Check-in</h1>
+        <p>올리라이프 출석 관리</p>
+      </div>
+      
+      <h2>계정 및 데이터 삭제 요청</h2>
+      
+      <div class="info-box">
+        <strong>삭제되는 데이터:</strong><br>
+        • 계정 정보 (이름, 전화번호, 비밀번호)<br>
+        • 출석 기록 (체크인 이력)<br>
+        • 이용권 정보 (월정액, 무료체험 등)<br><br>
+        <strong>처리 기간:</strong> 요청 접수 후 영업일 기준 7일 이내
+      </div>
+      
+      <div class="warning-box">
+        ⚠️ 계정 삭제 시 모든 데이터가 영구적으로 삭제되며, 복구할 수 없습니다.
+      </div>
+      
+      <form id="deleteForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">이름 *</label>
+          <input type="text" id="name" name="name" required placeholder="홍길동">
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">가입 시 사용한 전화번호 *</label>
+          <input type="tel" id="phone" name="phone" required placeholder="01012345678" pattern="[0-9]{10,11}">
+        </div>
+        
+        <div class="form-group">
+          <label for="reason">삭제 사유 (선택)</label>
+          <textarea id="reason" name="reason" placeholder="삭제 사유를 입력해 주세요 (선택사항)"></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn" id="submitBtn">계정 삭제 요청</button>
+      </form>
+      
+      <div class="contact">
+        문의: <a href="mailto:kimhj87@naver.com">kimhj87@naver.com</a>
+      </div>
+    </div>
+    
+    <div id="successSection" class="success-msg">
+      <div class="check">✅</div>
+      <h3>삭제 요청이 접수되었습니다</h3>
+      <p>
+        영업일 기준 7일 이내에 처리됩니다.<br>
+        처리 완료 시 별도 안내드리겠습니다.<br><br>
+        문의사항이 있으시면<br>
+        <a href="mailto:kimhj87@naver.com">kimhj87@naver.com</a>으로 연락해 주세요.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const reason = document.getElementById('reason').value.trim();
+      const btn = document.getElementById('submitBtn');
+      
+      if (!name || !phone) {
+        alert('이름과 전화번호를 입력해 주세요.');
+        return;
+      }
+      
+      btn.disabled = true;
+      btn.textContent = '처리 중...';
+      
+      // 이메일로 삭제 요청 전송 (mailto 방식)
+      const subject = encodeURIComponent('[계정삭제요청] ' + name + ' - ' + phone);
+      const body = encodeURIComponent(
+        '계정 삭제 요청\n\n' +
+        '이름: ' + name + '\n' +
+        '전화번호: ' + phone + '\n' +
+        '사유: ' + (reason || '미입력') + '\n' +
+        '요청일시: ' + new Date().toLocaleString('ko-KR')
+      );
+      
+      // 삭제 요청 정보를 로컬에 기록 (관리자 확인용)
+      try {
+        const requests = JSON.parse(localStorage.getItem('deleteRequests') || '[]');
+        requests.push({ name, phone, reason, date: new Date().toISOString() });
+        localStorage.setItem('deleteRequests', JSON.stringify(requests));
+      } catch(e) {}
+      
+      // 성공 화면 표시
+      setTimeout(() => {
+        document.getElementById('formSection').style.display = 'none';
+        document.getElementById('successSection').style.display = 'block';
+      }, 500);
+      
+      // 관리자에게 이메일 전송 시도
+      window.open('mailto:kimhj87@naver.com?subject=' + subject + '&body=' + body, '_self');
+    }
+  </script>
+</body>
+</html>

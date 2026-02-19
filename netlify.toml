@@ -1,7 +1,6 @@
 [build]
-  # 빌드 커맨드 없음 — 미리 빌드된 파일을 직접 푸시
   command = ""
-  publish = "."
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
